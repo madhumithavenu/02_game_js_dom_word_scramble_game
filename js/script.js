@@ -1,3 +1,6 @@
+const wordText = document.querySelector(".word");
+
+
 const initGame = () => {
     let randomObj = words[Math.floor(Math.random() * words.length)]; //getting random object from words 
     let wordArray = randomObj.word.split(""); //Splitting each letter of random word
@@ -6,6 +9,7 @@ const initGame = () => {
         //shuffling and swiping wordArray letters randomly
         [wordArray[i], wordArray[j]] = [wordArray[j], wordArray[i]];
     }
-    console.log(wordArray, randomObj.word);
+    wordText.innerHTML = wordArray.join(""); //passing shuffled word as word text
+    console.log(randomObj);
 }
 initGame();
