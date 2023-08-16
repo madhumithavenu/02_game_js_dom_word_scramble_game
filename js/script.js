@@ -1,12 +1,27 @@
 const wordText = document.querySelector(".word");
 hintText = document.querySelector(".hint span");
+timeText = document.querySelector(".time b");
 inputField = document.querySelector("input");
 refreshBtn = document.querySelector(".refresh-word");
 checkBtn = document.querySelector(".check-word");
 
-let correctWord;
+let correctWord, timer;
+
+const initTimer = maxTime => {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        if(maxTime > 0){
+            maxTime--; //decrement maxtime by -1
+            return timeText.innerText = maxTime;
+        }
+        clearInterval(timer);
+        alert(`Time off! ${correctWord.toUpperCase()} was the correct word`);
+    },1000);
+}
 
 const initGame = () => {
+    initTimer(30); //calling initTimer function with passing 30 as maxtime value
+
     let randomObj = words[Math.floor(Math.random() * words.length)]; //getting random object from words 
     let wordArray = randomObj.word.split(""); //Splitting each letter of random word
     for (let i = wordArray.length - 1; i > 0; i--) {
@@ -22,7 +37,6 @@ const initGame = () => {
     inputField.setAttribute("maxlength", correctWord.length);
     //setting input maxlength attr value to word length
 
-    console.log(randomObj);
 }
 initGame();
 
